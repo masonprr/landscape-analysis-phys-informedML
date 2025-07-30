@@ -1754,7 +1754,14 @@
         }
 
         function showCompanyInfo(company) {
+            console.log('showCompanyInfo called for:', company.name);
             const panel = document.getElementById('infoPanel');
+            console.log('Panel element:', panel);
+            
+            if (!panel) {
+                console.error('Info panel not found!');
+                return;
+            }
             
             document.getElementById('infoTitle').textContent = company.name;
             document.getElementById('infoDescription').textContent = company.description;
@@ -1792,6 +1799,7 @@
             document.getElementById('investors').textContent = investorsText;
             
             panel.classList.add('visible');
+            console.log('Added visible class to panel. Panel classes:', panel.className);
         }
 
         function closeInfoPanel() {
@@ -1839,7 +1847,7 @@
             }
             
             // Existing panel close functionality
-            if (!e.target.closest('.info-panel') && !e.target.closest('.company')) {
+            if (!e.target.closest('.info-panel') && !e.target.closest('.company') && !e.target.closest('.company-item')) {
                 closeInfoPanel();
             }
         });
@@ -1851,7 +1859,7 @@
 
                 
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.info-panel') && !e.target.closest('.company')) {
+            if (!e.target.closest('.info-panel') && !e.target.closest('.company') && !e.target.closest('.company-item')) {
                 closeInfoPanel();
             }
         });
@@ -2033,6 +2041,12 @@
                             companyElement.style.boxShadow = '';
                             companyElement.style.zIndex = '';
                         }
+                    });
+                    
+                    // Add click handler to show company info
+                    item.addEventListener('click', () => {
+                        console.log('Company clicked:', company.name);
+                        showCompanyInfo(company);
                     });
                     
                     listContainer.appendChild(item);
