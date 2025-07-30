@@ -1,1 +1,1 @@
-# landscape-analysis-phys-informedML
+# landscape-phys-informedML
